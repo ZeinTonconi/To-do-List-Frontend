@@ -4,8 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   
     {
-        path: '/',
-        
+        path: '',
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    },
+    {
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    },
+    {
+        path: 'todo',
+        loadChildren: () => import('./todo-app/todo-app.module').then(m => m.TodoAppModule)
     }
 
 ];
