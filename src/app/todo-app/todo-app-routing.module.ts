@@ -24,6 +24,11 @@ const routes: Routes = [
       {
         path: 'tag',
         component: TagComponent
+      },
+      {
+        path: '',
+        redirectTo: "home",
+        pathMatch: "full"
       }
     ]
   }
