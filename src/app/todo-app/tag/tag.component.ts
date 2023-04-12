@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tag',
@@ -8,5 +10,15 @@ import { Component } from '@angular/core';
 })
 export class TagComponent {
 
+  @ViewChild('myForm') myForm!:NgForm
+
+  constructor(private dialog: MatDialogRef<TagComponent>){}
+  
+  tag:string = "";
+
+  closeTag():void {
+    console.log("closeTag")
+    this.dialog.close();
+  }
 }
 
