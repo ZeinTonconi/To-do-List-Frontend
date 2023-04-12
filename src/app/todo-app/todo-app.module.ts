@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { TagComponent } from './tag/tag.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ConfigurationComponent } from './configuration/configuration.component'
   ],
   imports: [
     CommonModule,
-    TodoAppRoutingModule
+    TodoAppRoutingModule,
+    MaterialModule
   ]
 })
 export class TodoAppModule { }
