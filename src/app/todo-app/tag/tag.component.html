@@ -1,21 +1,34 @@
 
-<div class="form-group">
   <h1 mat-dialog-title>Create a new Tag</h1>
+
   <form autocomplete="off">
     <div mat-dialog-content>
       <p>What's the tag's name</p>
-      <mat-label> Tag's Name </mat-label>
-      <input type="text"
-               matInput 
-               class="form-control"
-               [(ngModel)]="tag"
-               name="tagName"
-               >
+      <mat-form-field appearance="fill">
+
+        <mat-label> Tag's Name </mat-label>
+        <input  type = "text"
+                matInput
+                [(ngModel)]="tag"
+                name="tagName"
+                required
+                >
+        <mat-error>It can't be empty</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Pikaa</mat-label>
+        <input matInput>
+      </mat-form-field>
+
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="closeTag()">Cancel</button>
-      <button mat-button [mat-dialog-close]="tag" cdkFocusInitial>Ok</button>
+      <button mat-button (click)="addTag()">Create Tag</button>
+
+      <button mat-button [mat-dialog-close]="tag" cdkFocusInitial
+              (click)="addTag()"
+      >Ok</button>
     </div>
   </form>
-  
-</div>

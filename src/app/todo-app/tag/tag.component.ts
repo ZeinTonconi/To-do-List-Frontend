@@ -20,5 +20,11 @@ export class TagComponent {
     console.log("closeTag")
     this.dialog.close();
   }
+  addTag(): void {
+    if(!this.tag) 
+      return;
+    console.log("Tag Created", this.tag);
+    this.closeTag();
+  }
 }
 
