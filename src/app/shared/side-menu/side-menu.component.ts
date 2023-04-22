@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   ]
 })
 export class SideMenuComponent {
-
+  
+  sideItems = [
+    {label: "Home", icon:"home"},
+    {label: "Tasks", icon:"check_circle"},
+    {label: "Settings", icon:"settings"}
+  ]
 }

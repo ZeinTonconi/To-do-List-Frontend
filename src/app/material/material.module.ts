@@ -7,6 +7,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   exports: [
@@ -15,6 +17,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatListModule,
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
