@@ -10,8 +10,16 @@ import { TagComponent } from '../tag/tag.component';
 })
 export class HomeComponent {
   
+  sideItems = [
+    {label: "Home", icon:"home"},
+    {label: "Tasks", icon:"check_circle"},
+    {label: "Settings", icon:"settings"}
+  ]
 
-  constructor (private dialog:MatDialog){}
+
+  displayedColumns: string[] = ['completed', 'task'];
+
+ constructor (private dialog:MatDialog){}
 
   openDialog():void{
     const tagModal = this.dialog.open(TagComponent);
