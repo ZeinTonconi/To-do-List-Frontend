@@ -8,7 +8,7 @@
             </button>
         </mat-toolbar>
         <mat-nav-list *ngFor="let sideItem of sideItems">
-            <button mat-button >
+            <button mat-button (click)="sideItem.func()">
                 <mat-icon>{{sideItem.icon}}</mat-icon>
                 <span class="spacer">{{sideItem.label}}</span>
             </button>
@@ -50,7 +50,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <!-- <button mat-button (click)="openDialog()">Create Tag</button> -->
+                <button mat-button (click)="openDialog()">Create Tag</button>
         
             </mat-card-content>
         </mat-card>        

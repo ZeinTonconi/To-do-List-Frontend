@@ -11,9 +11,10 @@ import { TagComponent } from '../tag/tag.component';
 export class HomeComponent {
   
   sideItems = [
-    {label: "Home", icon:"home"},
-    {label: "Tasks", icon:"check_circle"},
-    {label: "Settings", icon:"settings"}
+    {label: "Home", icon:"home", func: () => {}},
+    {label: "Tasks", icon:"check_circle", func: () => {}},
+    {label: "Settings", icon:"settings", func: () => {}},
+    {label: "Create Tag", icon: "add_circle_outline", func: this.openDialog}
   ]
 
 
@@ -22,6 +23,7 @@ export class HomeComponent {
  constructor (private dialog:MatDialog){}
 
   openDialog():void{
+    console.log(this.dialog)
     const tagModal = this.dialog.open(TagComponent);
     tagModal.afterClosed().subscribe(result => {
       console.log('Modal was closed',result);
