@@ -18,7 +18,12 @@ export class HomeComponent {
   ]
 
 
-  displayedColumns: string[] = ['completed', 'task'];
+  displayedColumns: string[] = ['completed', 'task','tags','category'];
+
+  taskData=[
+    {task: "Ir a la U", completed: true, tags: [], category: "Universidad"},
+    {task: "Practicar la guitarra", completed: false, tags: [], category: "Guitarra"}
+  ];
 
  constructor (private dialog:MatDialog){}
 
