@@ -8,6 +8,7 @@ import { CategoryComponent } from './category/category.component';
 import { TagComponent } from './tag/tag.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { MaterialModule } from '../material/material.module';
+import { ModalsModule } from './modals/modals.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     TodoAppRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ModalsModule
   ]
 })
 export class TodoAppModule { }

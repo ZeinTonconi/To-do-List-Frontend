@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TagComponent } from '../tag/tag.component';
+import { AddTagModalComponent } from '../modals/add-tag-modal/add-tag-modal.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class HomeComponent {
   
@@ -25,7 +25,7 @@ export class HomeComponent {
     {task: "Practicar la guitarra", completed: false, tags: ["Hobby","Creatividad","Musica","Guitarra"], category: "Guitarra"}
   ];
 
- constructor (private dialog:MatDialog){}
+ constructor (private dialog:MatDialog, private addDialogTag:MatDialog){}
 
   openDialog():void{
     console.log(this.dialog)
@@ -34,5 +34,14 @@ export class HomeComponent {
       console.log('Modal was closed',result);
 
     })
+  }
+
+  addTag(){
+    console.log("Add Tag")
+
+    this.addDialogTag.open(AddTagModalComponent,{
+      data: ['Universidad','Hobby']
+    });
+    
   }
 }

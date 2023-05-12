@@ -68,6 +68,11 @@
                                     *ngFor="let tag of element.tags">
                                     {{tag}}
                                 </mat-chip>
+                                <mat-chip (click)="addTag()"
+                                    color="warn"
+                                >
+                                +
+                                </mat-chip>
                             </mat-chip-set>
                         </td>
                     </ng-container>
