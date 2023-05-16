@@ -4,10 +4,12 @@ import { CategoryComponent } from './category/category.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { HomeComponent } from './home/home.component'
 import { TagComponent } from './tag/tag.component';
+import { TaskComponent } from './task/task.component';
 
 const routes: Routes = [
   {
     path: '',
+    component:HomeComponent,
     children: [
       {
         path: 'category',
@@ -18,8 +20,8 @@ const routes: Routes = [
         component: ConfigurationComponent
       },
       {
-        path: 'home',
-        component: HomeComponent
+        path: 'task',
+        component: TaskComponent
       },
       {
         path: 'tag',
@@ -27,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: "home",
+        redirectTo: "task",
         pathMatch: "full"
       }
     ]

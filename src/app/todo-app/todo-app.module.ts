@@ -9,6 +9,7 @@ import { TagComponent } from './tag/tag.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { MaterialModule } from '../material/material.module';
 import { ModalsModule } from './modals/modals.module';
+import { TaskComponent } from './task/task.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ModalsModule } from './modals/modals.module';
     HomeComponent,
     CategoryComponent,
     TagComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,
