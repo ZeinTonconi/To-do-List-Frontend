@@ -1,5 +1,7 @@
 import { Component, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { EditTagModalComponent } from '../modals/edit-tag-modal/edit-tag-modal.component';
 
 @Component({
   selector: 'app-tag',
@@ -12,7 +14,9 @@ export class TagComponent {
 
   @ViewChild(MatTable) table!: MatTable<string>;
 
-  tagData= [
+  constructor(public editTagModal:MatDialog){}
+
+  tagData=[
     "Universidad",
     "Casa",
     "Guitar"
@@ -24,6 +28,18 @@ export class TagComponent {
     this.table.renderRows();
   }
 
-  
+  edit(tagPosition:number){
+    const modal=this.editTagModal.open(EditTagModalComponent,{
+      data:{
+        tag: this.tagData[tagPosition]
+      }
+    })
+    modal.afterClosed().subscribe( result => {
+      if(result){
+        this.tagData[tagPosition]=result;
+        this.table.renderRows();
+      }
+    })
+  }
 }
 

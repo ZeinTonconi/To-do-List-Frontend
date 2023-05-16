@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Edit Tag</h2>
+<mat-dialog-content>
+    <form>
+        <mat-form-field class="full-width">
+          <mat-label>Tag's Name</mat-label>
+
+         <input matInput placeholder="Tag's Name" [(ngModel)]="tag" name="tag">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="tag" cdkFocusInitial>Edit</button>
+</mat-dialog-actions>
