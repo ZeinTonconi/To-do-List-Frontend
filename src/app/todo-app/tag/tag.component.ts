@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-tag',
@@ -8,5 +9,21 @@ import { Component} from '@angular/core';
 })
 export class TagComponent {
 
+
+  @ViewChild(MatTable) table!: MatTable<string>;
+
+  tagData= [
+    "Universidad",
+    "Casa",
+    "Guitar"
+  ]
+  displayedColumns:string[]=["nro","tag","action"]
+
+  delete(tagPosition:number){
+    this.tagData.splice(tagPosition,1);
+    this.table.renderRows();
+  }
+
+  
 }
 
