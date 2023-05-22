@@ -1,0 +1,19 @@
+<div class="form-group">
+    <h1 mat-dialog-title>Create a new Tag</h1>
+    <form autocomplete="off" >
+      <div mat-dialog-content>
+        <mat-label> Tag's Name </mat-label>
+        <input type="text"
+                 matInput 
+                 class="form-control"
+                 name="tagName"
+                 [(ngModel)]="tagName"
+                 >
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="closeTag()">Cancel</button>
+        <button mat-button [mat-dialog-close]="tagName" cdkFocusInitial>Ok</button>
+      </div>
+    </form>
+  
+  </div>
