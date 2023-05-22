@@ -3,6 +3,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { EditTagModalComponent } from '../modals/edit-tag-modal/edit-tag-modal.component';
 import { CreateTagModalComponent } from '../modals/create-tag-modal/create-tag-modal.component';
+import { HttpClient } from '@angular/common/http';
+
+// Key Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0
+
+interface TagResponse {
+  tags: Tag[];
+}
+interface Tag {
+  id: string,
+  tagName: string,
+  id_user: string
+}
 
 @Component({
   selector: 'app-tag',
@@ -12,16 +24,24 @@ import { CreateTagModalComponent } from '../modals/create-tag-modal/create-tag-m
 })
 export class TagComponent {
 
-
+  tagData: Tag[]=[];
   @ViewChild(MatTable) table!: MatTable<string>;
 
-  constructor(public editTagModal:MatDialog, public createTagModal: MatDialog){}
+  constructor(public editTagModal:MatDialog, 
+              public createTagModal: MatDialog, 
+              private http: HttpClient){
+    this.http.get<TagResponse>
+    ('http://localhost:8080/api/tag',
+    {
+      headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
+    })
+    .subscribe((value)=> {
+      this.tagData=value.tags;
+      this.table.renderRows();
+    })
+  }
 
-  tagData=[
-    "Universidad",
-    "Casa",
-    "Guitar"
-  ]
+  
   displayedColumns:string[]=["nro","tag","action"]
 
   delete(tagPosition:number){
@@ -32,12 +52,12 @@ export class TagComponent {
   edit(tagPosition:number){
     const modal=this.editTagModal.open(EditTagModalComponent,{
       data:{
-        tag: this.tagData[tagPosition]
+        tag: this.tagData[tagPosition].tagName
       }
     })
     modal.afterClosed().subscribe( result => {
       if(result){
-        this.tagData[tagPosition]=result;
+        this.tagData[tagPosition].tagName=result;
         this.table.renderRows();
       }
     })
@@ -48,8 +68,17 @@ export class TagComponent {
 
     createModal.afterClosed().subscribe(result => {
       if(result){
-        this.tagData.push(result);
-        this.table.renderRows();
+        this.http.post('http://localhost:8080/api/tag',
+        {
+          tagName: result
+        },
+        {
+          headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
+        }).subscribe( (res:any) => {
+          const {tag} = res;
+          this.tagData.push(tag);
+          this.table.renderRows();
+        })
       }
     })
   }
