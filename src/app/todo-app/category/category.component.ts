@@ -4,6 +4,7 @@ import { EditTagModalComponent } from '../modals/edit-tag-modal/edit-tag-modal.c
 import { CategoryService } from '../services/category.service';
 import { Category } from '../interfaces/category.interface';
 import { MatDialog } from '@angular/material/dialog';
+import { CreateTagModalComponent } from '../modals/create-tag-modal/create-tag-modal.component';
 
 @Component({
   selector: 'app-category',
@@ -19,7 +20,8 @@ export class CategoryComponent {
   displayedColumns:string[]=["nro","category","action"]
 
   constructor(private categoryService: CategoryService,
-              private editCategoryModal: MatDialog){
+              private editCategoryModal: MatDialog,
+              private createCategoryModal: MatDialog){
 
     categoryService.getCategories().subscribe( (result) => {
       this.categoryData=result.categories;
@@ -58,6 +60,17 @@ export class CategoryComponent {
   }
 
   openCreateTag(){
+    const modal = this.createCategoryModal.open(CreateTagModalComponent);
+    modal.afterClosed().subscribe((categoryName:string) => {
+      if(categoryName){
 
+        this.categoryService.postCategory(categoryName).subscribe( (response) => {
+          const {category} = response;
+          this.categoryData.push(category);
+          this.table.renderRows();
+        })
+
+      }
+    })
   }
 }

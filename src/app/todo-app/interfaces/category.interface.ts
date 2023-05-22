@@ -12,5 +12,5 @@ export interface CategoryResponseGet{
 
 export interface CategoryResponse{
     msg: string,
-    tag: Category
+    category: Category
 }
