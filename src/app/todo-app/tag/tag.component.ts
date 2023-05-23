@@ -7,13 +7,18 @@ import { HttpClient } from '@angular/common/http';
 
 // Key Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0
 
-interface TagResponse {
+interface TagResponseGet {
   tags: Tag[];
 }
 interface Tag {
   id: string,
   tagName: string,
   id_user: string
+}
+
+interface TagResponse {
+  msg: string,
+  tag: Tag
 }
 
 @Component({
@@ -30,7 +35,7 @@ export class TagComponent {
   constructor(public editTagModal:MatDialog, 
               public createTagModal: MatDialog, 
               private http: HttpClient){
-    this.http.get<TagResponse>
+    this.http.get<TagResponseGet>
     ('http://localhost:8080/api/tag',
     {
       headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
@@ -45,8 +50,17 @@ export class TagComponent {
   displayedColumns:string[]=["nro","tag","action"]
 
   delete(tagPosition:number){
-    this.tagData.splice(tagPosition,1);
-    this.table.renderRows();
+
+    const tag = this.tagData[tagPosition];
+    this.http.delete(`http://localhost:8080/api/tag/${tag.id}`,
+    {
+      headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
+    })
+    .subscribe((tag) => {  
+      this.tagData.splice(tagPosition,1);
+      this.table.renderRows();      
+    })
+
   }
 
   edit(tagPosition:number){
@@ -55,10 +69,22 @@ export class TagComponent {
         tag: this.tagData[tagPosition].tagName
       }
     })
+    
+    const tag = this.tagData[tagPosition];
+
     modal.afterClosed().subscribe( result => {
       if(result){
-        this.tagData[tagPosition].tagName=result;
-        this.table.renderRows();
+        this.http.put(`http://localhost:8080/api/tag/${tag.id}`,
+        {
+          newTag: result
+        },
+        {
+          headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
+        }).subscribe( (res) => {
+          this.tagData[tagPosition].tagName=result;
+          this.table.renderRows();
+
+        })
       }
     })
   }
