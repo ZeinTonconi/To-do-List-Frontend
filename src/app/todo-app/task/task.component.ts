@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTagModalComponent } from '../modals/add-tag-modal/add-tag-modal.component';
+import { TaskService } from '../services/task.service';
+import { Task, Tasks } from '../interfaces/task.interface';
 
 @Component({
   selector: 'app-task',
@@ -13,12 +15,16 @@ export class TaskComponent {
 
   displayedColumns: string[] = ['completed', 'task','tags','category'];
 
-  taskData=[
-    {task: "Ir a la U", completed: true, tags: ["Universidad","Estudio"], category: "Universidad"},
-    {task: "Practicar la guitarra", completed: false, tags: ["Hobby","Creatividad","Musica","Guitarra"], category: "Guitarra"}
-  ];
+  taskData!:Task[];
 
-  constructor (private addDialogTag:MatDialog){}
+  constructor (private addDialogTag:MatDialog, 
+               private taskService:TaskService){
+    
+    this.taskService.getTasks().subscribe( ({tasks}) => {
+      this.taskData=tasks
+      console.log(this.taskData)
+    })
+  }
 
 
   addTag(){

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Tag, TagResponse, Tags } from '../interfaces/tags.insterface';
+import { Tag, TagResponse, Tags } from '../interfaces/tag.insterface';
 
 @Injectable({
   providedIn: 'root'

@@ -12,6 +12,8 @@ import { MaterialModule } from '../material/material.module';
 import { ModalsModule } from './modals/modals.module';
 import { TaskComponent } from './task/task.component';
 import { CategoryService } from './services/category.service';
+import { TaskService } from './services/task.service';
+import { TagService } from './services/tag.service';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { CategoryService } from './services/category.service';
     HttpClientModule
   ],
   providers: [
-    CategoryService
+    CategoryService,
+    TaskService,
+    TagService
   ]
 })
 export class TodoAppModule { }
