@@ -6,11 +6,15 @@ export interface Category {
     id_user: string
 }
 
-export interface CategoryResponseGet{
+export interface Categories{
     categories: Category[]
 }
 
 export interface CategoryResponse{
     msg: string,
     category: Category
+}
+
+export interface CategoryErrorResponse{
+    msg: string
 }

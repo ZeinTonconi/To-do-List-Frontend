@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Categories, CategoryResponse } from '../interfaces/category.interface';
+import { Tag, TagResponse, Tags } from '../interfaces/tags.insterface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class TagService {
 
   keyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NzMwNzUyMywiZXhwIjoxNjg3NTY2NzIzfQ.BlGRGw7YrJhkcG4o3vxeGWxYjxn5jzUfZM8LYQlNcDY";
   configHeader = {
@@ -15,28 +15,34 @@ export class CategoryService {
   url:string = "http://localhost:8080/api";
   constructor(private http:HttpClient) { }
 
-  getCategories(){
-    return this.http.get<Categories>(`${this.url}/category`, 
+  getTags(){
+    return this.http.get<Tags>(`${this.url}/tag`, 
       {
         headers: this.configHeader
       }
     )
   }
 
-  postCategory(categoryName: string){
-    return this.http.post<CategoryResponse>(`${this.url}/category`,
-    { categoryName },
+  postTagToTask(idTag: string, idTask: string){
+    return this.http.post<TagResponse>(`${this.url}/tasks/${idTask}/tag`,
+    { idTag },
+    { headers: this.configHeader });
+  }
+
+  postTag(tagName: string){
+    return this.http.post<TagResponse>(`${this.url}/tag`,
+    { tagName },
     { headers: this.configHeader });
   }
   
-  putCategory(newCategory: string, id: string){
-    return this.http.put<CategoryResponse>(`${this.url}/category/${id}`,
-    { newCategory },
+  putTag(newTag: string, id: string){
+    return this.http.put<TagResponse>(`${this.url}/tag/${id}`,
+    { newTag },
     { headers: this.configHeader })
   }
   
-  deleteCategory(id:string){
-    return this.http.delete<CategoryResponse>(`${this.url}/category/${id}`,
+  deleteTag(id:string){
+    return this.http.delete<TagResponse>(`${this.url}/tag/${id}`,
     { headers: this.configHeader })
   }
 

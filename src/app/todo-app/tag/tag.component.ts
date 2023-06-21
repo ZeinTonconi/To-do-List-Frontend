@@ -38,7 +38,7 @@ export class TagComponent {
     this.http.get<TagResponseGet>
     ('http://localhost:8080/api/tag',
     {
-      headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
+      headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NzMwNzUyMywiZXhwIjoxNjg3NTY2NzIzfQ.BlGRGw7YrJhkcG4o3vxeGWxYjxn5jzUfZM8LYQlNcDY"}
     })
     .subscribe((value)=> {
       this.tagData=value.tags;
@@ -59,7 +59,13 @@ export class TagComponent {
     .subscribe((tag) => {  
       this.tagData.splice(tagPosition,1);
       this.table.renderRows();      
-    })
+    }, 
+    // callback por error
+    // navbar
+    (error) => {
+      console.log(error);
+    })  
+    
 
   }
 
