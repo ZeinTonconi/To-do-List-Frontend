@@ -4,22 +4,10 @@ import { MatTable } from '@angular/material/table';
 import { EditTagModalComponent } from '../modals/edit-tag-modal/edit-tag-modal.component';
 import { CreateTagModalComponent } from '../modals/create-tag-modal/create-tag-modal.component';
 import { HttpClient } from '@angular/common/http';
+import { TagService } from '../services/tag.service';
+import { Tag, Tags } from '../interfaces/tag.insterface';
 
 // Key Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0
-
-interface TagResponseGet {
-  tags: Tag[];
-}
-interface Tag {
-  id: string,
-  tagName: string,
-  id_user: string
-}
-
-interface TagResponse {
-  msg: string,
-  tag: Tag
-}
 
 @Component({
   selector: 'app-tag',
@@ -34,13 +22,8 @@ export class TagComponent {
 
   constructor(public editTagModal:MatDialog, 
               public createTagModal: MatDialog, 
-              private http: HttpClient){
-    this.http.get<TagResponseGet>
-    ('http://localhost:8080/api/tag',
-    {
-      headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NzMwNzUyMywiZXhwIjoxNjg3NTY2NzIzfQ.BlGRGw7YrJhkcG4o3vxeGWxYjxn5jzUfZM8LYQlNcDY"}
-    })
-    .subscribe((value)=> {
+              private tagService: TagService){
+    this.tagService.getTags().subscribe((value)=> {
       this.tagData=value.tags;
       this.table.renderRows();
     })
@@ -52,10 +35,7 @@ export class TagComponent {
   delete(tagPosition:number){
 
     const tag = this.tagData[tagPosition];
-    this.http.delete(`http://localhost:8080/api/tag/${tag.id}`,
-    {
-      headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
-    })
+    this.tagService.deleteTag(tag.id)
     .subscribe((tag) => {  
       this.tagData.splice(tagPosition,1);
       this.table.renderRows();      
@@ -80,13 +60,8 @@ export class TagComponent {
 
     modal.afterClosed().subscribe( result => {
       if(result){
-        this.http.put(`http://localhost:8080/api/tag/${tag.id}`,
-        {
-          newTag: result
-        },
-        {
-          headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
-        }).subscribe( (res) => {
+        this.tagService.putTag(result,tag.id)
+        .subscribe( (res) => {
           this.tagData[tagPosition].tagName=result;
           this.table.renderRows();
 
@@ -100,13 +75,8 @@ export class TagComponent {
 
     createModal.afterClosed().subscribe(result => {
       if(result){
-        this.http.post('http://localhost:8080/api/tag',
-        {
-          tagName: result
-        },
-        {
-          headers: {keyToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4NDc2Mzk2NCwiZXhwIjoxNjg1MDIzMTY0fQ.ovbqAxXZKvWL5Lu9rNRrz0FRiDkBhpjYXUWLoy7rJM0"}
-        }).subscribe( (res:any) => {
+        this.tagService.postTag(result)
+        .subscribe( (res:any) => {
           const {tag} = res;
           this.tagData.push(tag);
           this.table.renderRows();

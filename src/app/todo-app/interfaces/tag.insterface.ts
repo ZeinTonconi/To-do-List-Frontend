@@ -7,7 +7,7 @@ export interface Tag {
   }
 
 export interface Tags{
-    categories: Tag[]
+    tags: Tag[]
 }
 
 export interface TagResponse{
