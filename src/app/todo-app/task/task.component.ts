@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTagModalComponent } from '../modals/add-tag-modal/add-tag-modal.component';
 import { TaskService } from '../services/task.service';
-import { Task, Tasks } from '../interfaces/task.interface';
+import { Task } from '../interfaces/task.interface';
 
 @Component({
   selector: 'app-task',
@@ -27,11 +27,10 @@ export class TaskComponent {
   }
 
 
-  addTag(){
-    console.log("Add Tag")
+  addTag(task:Task){
 
     this.addDialogTag.open(AddTagModalComponent,{
-      data: ['Universidad','Hobby']
+      data: task.tags
     });
     
   }
