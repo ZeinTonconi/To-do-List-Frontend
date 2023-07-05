@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -31,7 +32,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
-
+    DragDropModule
   
   ]
 })

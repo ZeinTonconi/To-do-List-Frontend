@@ -30,7 +30,11 @@ export class TaskComponent {
   addTag(task:Task){
 
     this.addDialogTag.open(AddTagModalComponent,{
-      data: task.tags
+      data: {
+        actualTags : task.tags,
+        idTask: task.id
+      }
+      
     });
     
   }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Tasks } from '../interfaces/task.interface';
+import { Tasks, Task } from '../interfaces/task.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,21 @@ export class TaskService {
   getTasks(){
     return this.http.get<Tasks>(`${this.url}/api/tasks`,
     {headers: this.configHeader})
+  }
+
+  addTag(idTask:string, idTag:string) {
+    return this.http.post<{msg:String, task:Task}>(`${this.url}/api/tasks/${idTask}/tag`,
+      { idTag },
+      {headers: this.configHeader}
+    )
+  }
+
+  removetag(idTask:string, idTag:string) {
+    return this.http.delete<{msg: String, task: Task}>(`${this.url}/api/tasks/${idTask}/tag`, 
+    {
+      headers: this.configHeader,
+      body: { idTag }  
+    }
+    )
   }
 }
