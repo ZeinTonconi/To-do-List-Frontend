@@ -82,4 +82,8 @@ export class TaskComponent {
       this.table.renderRows();
     })
   }
+
+  changeCompleted(task:Task){
+    this.taskService.completeTask(task.id).subscribe();
+  }
 }

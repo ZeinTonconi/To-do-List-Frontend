@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tasks, Task, NewTask } from '../interfaces/task.interface';
 import { AuthService } from './auth.service';
@@ -50,6 +50,12 @@ export class TaskService {
 
   deleteTask(idTask:string){
     return this.http.delete<{msg:string}>(`${this.url}/api/tasks/${idTask}`,
+    this.authService.getConfigHeader())
+  }
+
+  completeTask(idTask: string){
+    return this.http.put<{msg:String, task:Task}>(`${this.url}/api/tasks/${idTask}/complete`,
+    {},
     this.authService.getConfigHeader())
   }
 }
