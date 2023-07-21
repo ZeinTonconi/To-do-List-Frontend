@@ -1,43 +1,40 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categories, CategoryResponse } from '../interfaces/category.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  keyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4ODQ4NDQ0MSwiZXhwIjoxNjg4NzQzNjQxfQ.H1fdMY81aReHnwVCjg66u52853MXhMgJ0DqGEvEWOiU";
-  configHeader = {
-    keyToken: this.keyToken
-  }
 
   url:string = "http://localhost:8080/api";
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private authService: AuthService
+    ) { }
 
   getCategories(){
     return this.http.get<Categories>(`${this.url}/category`, 
-      {
-        headers: this.configHeader
-      }
+      this.authService.getConfigHeader()
     )
   }
 
   postCategory(categoryName: string){
     return this.http.post<CategoryResponse>(`${this.url}/category`,
     { categoryName },
-    { headers: this.configHeader });
+    this.authService.getConfigHeader());
   }
   
   putCategory(newCategory: string, id: string){
     return this.http.put<CategoryResponse>(`${this.url}/category/${id}`,
     { newCategory },
-    { headers: this.configHeader })
+    this.authService.getConfigHeader())
   }
   
   deleteCategory(id:string){
     return this.http.delete<CategoryResponse>(`${this.url}/category/${id}`,
-    { headers: this.configHeader })
+    this.authService.getConfigHeader())
   }
 
 

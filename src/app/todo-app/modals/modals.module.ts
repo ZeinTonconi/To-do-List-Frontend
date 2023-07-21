@@ -9,6 +9,7 @@ import { AddTagModalComponent } from './add-tag-modal/add-tag-modal.component';
 import { MaterialModule } from '../../material/material.module';
 import { EditTagModalComponent } from './edit-tag-modal/edit-tag-modal.component';
 import { CreateTagModalComponent } from './create-tag-modal/create-tag-modal.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
 
 
 
@@ -16,7 +17,8 @@ import { CreateTagModalComponent } from './create-tag-modal/create-tag-modal.com
   declarations: [
     AddTagModalComponent,
     EditTagModalComponent,
-    CreateTagModalComponent
+    CreateTagModalComponent,
+    CreateTaskComponent
   ],
   imports: [
     CommonModule,

@@ -51,7 +51,13 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-
+            <button mat-raised-button
+                color="primary"
+                style="margin: 1rem;"
+                (click)="createTask()"
+            >
+                Create a New Task
+            </button>
         </mat-card-content>
     </mat-card>        
 

@@ -1,50 +1,44 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tag, TagResponse, Tags } from '../interfaces/tag.insterface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TagService {
 
-  keyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4ODQ4NDQ0MSwiZXhwIjoxNjg4NzQzNjQxfQ.H1fdMY81aReHnwVCjg66u52853MXhMgJ0DqGEvEWOiU";
-  configHeader = {
-    keyToken: this.keyToken
-  }
-
   url:string = "http://localhost:8080/api";
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private authService: AuthService
+    ) { }
 
   getTags(){
     return this.http.get<Tags>(`${this.url}/tag`, 
-      {
-        headers: this.configHeader
-      }
+      this.authService.getConfigHeader()
     )
   }
 
   postTagToTask(idTag: string, idTask: string){
     return this.http.post<TagResponse>(`${this.url}/tasks/${idTask}/tag`,
     { idTag },
-    { headers: this.configHeader });
+    this.authService.getConfigHeader());
   }
 
   postTag(tagName: string){
     return this.http.post<TagResponse>(`${this.url}/tag`,
     { tagName },
-    { headers: this.configHeader });
+    this.authService.getConfigHeader());
   }
   
   putTag(newTag: string, id: string){
     return this.http.put<TagResponse>(`${this.url}/tag/${id}`,
     { newTag },
-    { headers: this.configHeader })
+    this.authService.getConfigHeader())
   }
   
   deleteTag(id:string){
     return this.http.delete<TagResponse>(`${this.url}/tag/${id}`,
-    { headers: this.configHeader })
+    this.authService.getConfigHeader())
   }
-
-
 }

@@ -50,7 +50,6 @@ export class AddTagModalComponent {
 
   drop(event: CdkDragDrop<Tag[]>){
     const tag = event.previousContainer.data[event.previousIndex];
-    console.log(event.previousContainer.data);
     if (event.previousContainer !== event.container) {
       if(this.actualTags.includes(tag)){
         this.taskService.removetag(this.idTask,tag.id).subscribe((res) => {

@@ -1,16 +1,28 @@
 import { Category } from "./category.interface"
-import { Tags } from "./tag.insterface"
+import { Tag } from "./tag.insterface"
 
 export interface Task{
     id: string,
-    despcription: string,
+    description: string,
     status: boolean,
     id_category: string,
-    tags: Tags,
+    tags: Tag[],
     category: Category,
-    imgaes?: []
+    images?: []
 }
 
 export interface Tasks{
     tasks: Task[]
+}
+
+export interface NewTask{
+    msg: string,
+    newTask: {
+        status: boolean,
+        id: string,
+        description: string,
+        id_category: string,
+        id_user: string
+    },
+    category: Category
 }
