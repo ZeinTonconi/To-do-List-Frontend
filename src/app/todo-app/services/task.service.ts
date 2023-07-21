@@ -47,4 +47,10 @@ export class TaskService {
       idCategory
     },this.authService.getConfigHeader())
   }
+
+  deleteTask(idTask:string){
+    return this.http.delete<{msg:string}>(`${this.url}/api/tasks/${idTask}`,
+    this.authService.getConfigHeader())
+  }
 }
+

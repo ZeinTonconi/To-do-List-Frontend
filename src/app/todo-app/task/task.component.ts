@@ -16,7 +16,7 @@ import { Tag } from '../interfaces/tag.insterface';
 export class TaskComponent {
   
 
-  displayedColumns: string[] = ['completed', 'task','tags','category'];
+  displayedColumns: string[] = ['completed', 'task','tags','category','action'];
 
   @ViewChild(MatTable) table!: MatTable<string>;
 
@@ -46,7 +46,6 @@ export class TaskComponent {
 
   createTask(){
 
-
     this.createTaskDialog.open(CreateTaskComponent)
       .afterClosed().subscribe((newTask) =>{
         console.log(newTask);
@@ -74,5 +73,13 @@ export class TaskComponent {
           });
         }
       });
+  }
+
+  delete(index:number){
+    const task=this.taskData[index];
+    this.taskService.deleteTask(task.id).subscribe((res)=> {
+      this.taskData.splice(index,1);
+      this.table.renderRows();
+    })
   }
 }
