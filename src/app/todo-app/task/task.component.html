@@ -51,12 +51,12 @@
                     <th mat-header-cell *matHeaderCellDef>Actions</th>                  
                     <td mat-cell *matCellDef="let element; let i=index">
                         <button mat-button
-                        (click)="delete(i)"
+                            (click)="delete(i)"
                         >
                           <mat-icon>delete</mat-icon>
                         </button>
                         <button mat-button
-                        
+                            (click)="update(i)"
                         >
                           <mat-icon>edit</mat-icon>
                         </button>

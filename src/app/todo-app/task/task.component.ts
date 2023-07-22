@@ -6,6 +6,7 @@ import { Task } from '../interfaces/task.interface';
 import { CreateTaskComponent } from '../modals/create-task/create-task.component';
 import { MatTable } from '@angular/material/table';
 import { Tag } from '../interfaces/tag.insterface';
+import { UpdateTaskComponent } from '../modals/update-task/update-task.component';
 
 @Component({
   selector: 'app-task',
@@ -24,7 +25,9 @@ export class TaskComponent {
 
   constructor (private addDialogTag:MatDialog, 
                private taskService:TaskService,
-               private createTaskDialog:MatDialog){
+               private createTaskDialog:MatDialog,
+               private updateTaskDialog:MatDialog
+               ){
     
     this.taskService.getTasks().subscribe( ({tasks}) => {
       this.taskData=tasks
@@ -85,5 +88,25 @@ export class TaskComponent {
 
   changeCompleted(task:Task){
     this.taskService.completeTask(task.id).subscribe();
+  }
+
+  update(index: number){
+    this.updateTaskDialog.open(UpdateTaskComponent,{data: this.taskData[index]})
+      .afterClosed().subscribe((res) => {
+        if(res){
+          const newDescription = res.name;
+          const newCategory = res.category;
+          const task = this.taskData[index];
+          this.taskService.updateTask(task.id,newDescription,newCategory).subscribe((task) => {
+
+            this.taskData[index].description = newDescription;
+            this.taskData[index].category = task.category;
+            this.table.renderRows();
+          })
+
+          
+        }
+
+      })
   }
 }

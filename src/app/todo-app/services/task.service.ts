@@ -58,5 +58,11 @@ export class TaskService {
     {},
     this.authService.getConfigHeader())
   }
+
+  updateTask(idTask:string, newDescri:string, newCategory:string){
+    return this.http.put<NewTask>(`${this.url}/api/tasks/${idTask}`,
+    {newDescri, newCategory},
+    this.authService.getConfigHeader())
+  }
 }
 

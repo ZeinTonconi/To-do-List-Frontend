@@ -10,6 +10,7 @@ import { MaterialModule } from '../../material/material.module';
 import { EditTagModalComponent } from './edit-tag-modal/edit-tag-modal.component';
 import { CreateTagModalComponent } from './create-tag-modal/create-tag-modal.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
+import { UpdateTaskComponent } from './update-task/update-task.component';
 
 
 
@@ -18,7 +19,8 @@ import { CreateTaskComponent } from './create-task/create-task.component';
     AddTagModalComponent,
     EditTagModalComponent,
     CreateTagModalComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    UpdateTaskComponent
   ],
   imports: [
     CommonModule,
