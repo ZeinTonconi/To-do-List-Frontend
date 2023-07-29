@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  keyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY4OTk0MTA4NSwiZXhwIjoxNjkwMjAwMjg1fQ.IidYLYP61BaG8cjNZFifz-4JnSEaF3Od0fU0AJ6i3rU"
+  keyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY5MDU5NzI3NCwiZXhwIjoxNjkwODU2NDc0fQ.7XTwXzEqNbuOmfuC_Eds_5ZCzorEIMSvgFJjN24_UPM"
 
   constructor() { }
 
