@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from 'src/app/environments/environments';
 import { User } from '../interfaces/user.interface';
@@ -20,15 +20,20 @@ export class AuthService {
 
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
-  public keyToken = computed(() => localStorage.getItem('keyToken'))
+  public keyToken = computed(() => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY5NzI5NDk0OSwiZXhwIjoxNjk3NTU0MTQ5fQ.A7f0nNQuv-2sfR5ubBQyWVL04GrunJj5QySl-6guAkE"
+  //localStorage.getItem('keyToken')
+  )
   constructor() { 
 
   }
 
   getConfigHeader(){
-    return {
-      headers: { keyToken: this.keyToken } 
-    }
+    return new HttpHeaders()
+    .set("keyToken", this.keyToken() ?? "")
+
+    // return {
+    //   headers: { keyToken: this.keyToken() } 
+    // }
   }
 
   private setAuthentication(user: User, token: string): Boolean {

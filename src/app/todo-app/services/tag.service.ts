@@ -15,30 +15,30 @@ export class TagService {
 
   getTags(){
     return this.http.get<Tags>(`${this.url}/tag`, 
-      this.authService.getConfigHeader()
+      { headers: this.authService.getConfigHeader() }
     )
   }
 
   postTagToTask(idTag: string, idTask: string){
     return this.http.post<TagResponse>(`${this.url}/tasks/${idTask}/tag`,
     { idTag },
-    this.authService.getConfigHeader());
+    { headers: this.authService.getConfigHeader() })
   }
 
   postTag(tagName: string){
     return this.http.post<TagResponse>(`${this.url}/tag`,
     { tagName },
-    this.authService.getConfigHeader());
+    { headers: this.authService.getConfigHeader() });
   }
   
   putTag(newTag: string, id: string){
     return this.http.put<TagResponse>(`${this.url}/tag/${id}`,
     { newTag },
-    this.authService.getConfigHeader())
+    { headers: this.authService.getConfigHeader() })
   }
   
   deleteTag(id:string){
     return this.http.delete<TagResponse>(`${this.url}/tag/${id}`,
-    this.authService.getConfigHeader())
+    { headers: this.authService.getConfigHeader() })
   }
 }

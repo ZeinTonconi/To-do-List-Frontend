@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTagModalComponent } from '../modals/add-tag-modal/add-tag-modal.component';
 import { TaskService } from '../services/task.service';
@@ -13,7 +13,7 @@ import { UpdateTaskComponent } from '../modals/update-task/update-task.component
   templateUrl: './task.component.html',
   styles: [
   ]
-})
+}) 
 export class TaskComponent {
   
 
@@ -23,10 +23,15 @@ export class TaskComponent {
 
   taskData!:Task[];
 
-  constructor (private addDialogTag:MatDialog, 
+  private addDialogTag = inject(MatDialog)
+  private createTaskDialog = inject(MatDialog)
+  private updateTaskDialog = inject(MatDialog)
+
+  constructor (
+    //private addDialogTag:MatDialog, 
                private taskService:TaskService,
-               private createTaskDialog:MatDialog,
-               private updateTaskDialog:MatDialog
+    //private createTaskDialog:MatDialog,
+               //private updateTaskDialog:MatDialog
                ){
     
     this.taskService.getTasks().subscribe( ({tasks}) => {
