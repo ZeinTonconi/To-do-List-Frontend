@@ -14,7 +14,7 @@ import { TaskComponent } from './task/task.component';
 import { CategoryService } from './services/category.service';
 import { TaskService } from './services/task.service';
 import { TagService } from './services/tag.service';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../auth/services/auth.service';
 
 
 @NgModule({

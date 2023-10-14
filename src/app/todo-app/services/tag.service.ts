@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tag, TagResponse, Tags } from '../interfaces/tag.insterface';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
