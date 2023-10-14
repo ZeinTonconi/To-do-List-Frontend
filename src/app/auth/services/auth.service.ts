@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from 'src/app/environments/environments';
 import { User } from '../interfaces/user.interface';
+import { AuthStatus } from '../interfaces/auth-status.enum';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { LoginResponse } from '../interfaces/login-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +16,40 @@ export class AuthService {
   private http = inject(HttpClient);
 
   private _currentUser = signal<User|null>(null);
-  private _authStatus = signal<String>(null);
-  
-  keyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY5NjYzMjE5NSwiZXhwIjoxNjk2ODkxMzk1fQ.BmYL9r8pNGoxo-rEf8ku_SGj0SwTtpqL_7TFY6zlbwg"
+  private _authStatus = signal<AuthStatus>(AuthStatus.notAuthenticated);
 
-  constructor() { }
+  public currentUser = computed(() => this._currentUser());
+  public authStatus = computed(() => this._authStatus());
+  public keyToken = computed(() => localStorage.getItem('keyToken'))
+  constructor() { 
+
+  }
 
   getConfigHeader(){
     return {
       headers: { keyToken: this.keyToken } 
     }
   }
+
+  private setAuthentication(user: User, token: string): Boolean {
+
+    this._currentUser.set(user);
+    this._authStatus.set(AuthStatus.authenticated);
+    localStorage.setItem('keyToken',token);
+    return true;
+  }
+
+  login(email: string, password: string): Observable<Boolean> {
+
+    const url = `${ this.baseURL }/api/auth/login`;
+    const body = {email, password}
+
+    return this.http.post<LoginResponse>(url, body)
+      .pipe(
+        map( ({user, token}) => this.setAuthentication(user,token) ),
+        catchError(err => throwError(() => err.error.message))
+      );
+
+  }
+
 }
