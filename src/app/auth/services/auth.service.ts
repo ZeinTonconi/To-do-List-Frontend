@@ -17,12 +17,12 @@ export class AuthService {
 
   private _currentUser = signal<User|null>(null);
   private _authStatus = signal<AuthStatus>(AuthStatus.notAuthenticated);
-
+  
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
-  public keyToken = computed(() => "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIwMUdORVlDWTFWVEY3VzY2TkY1WUYwWjJSMCIsImlhdCI6MTY5NzI5NDk0OSwiZXhwIjoxNjk3NTU0MTQ5fQ.A7f0nNQuv-2sfR5ubBQyWVL04GrunJj5QySl-6guAkE"
-  //localStorage.getItem('keyToken')
-  )
+  public keyToken = computed(() => localStorage.getItem('keyToken'));
+
+  
   constructor() { 
 
   }
@@ -46,7 +46,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<Boolean> {
 
-    const url = `${ this.baseURL }/api/auth/login`;
+    const url = `${ this.baseURL }api/auth/login`;
     const body = {email, password}
 
     return this.http.post<LoginResponse>(url, body)
