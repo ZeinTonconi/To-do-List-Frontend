@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TagComponent } from '../tag/tag.component';
 import { AddTagModalComponent } from '../modals/add-tag-modal/add-tag-modal.component';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +20,19 @@ export class HomeComponent {
 
  constructor (){}
 
+  private authService = inject(AuthService)
+  private router = inject(Router)
+  
   redirectTo(event:any){
     
     const router=inject(Router);
     router.navigate([event]);
     console.log(event);
 
+  }
+
+  logout(){
+    this.authService.logout()
+    // this.router.navigateByUrl('/auth/login')
   }
 }

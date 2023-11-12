@@ -53,7 +53,6 @@ export class LoginComponent {
   })
 
   
-
   login(){
     const {email, password} = this.loginForm.value
 
@@ -61,7 +60,8 @@ export class LoginComponent {
       this.authService.login(email, password)
       .subscribe( {
           next: success => {
-            this.router.navigateByUrl('/todo/task')
+            // console.log("Redirecting to App...")
+            // this.router.navigateByUrl('/todo/task')
           },
           error: errorMsg => {
             this.loginForm.setErrors({
