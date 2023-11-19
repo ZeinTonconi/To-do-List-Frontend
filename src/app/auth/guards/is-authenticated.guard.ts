@@ -5,8 +5,12 @@ import { AuthStatus } from '../interfaces/auth-status.enum';
 
 export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   
+
   const authService = inject(AuthService)
-  if(authService.authStatus() === AuthStatus.authenticated)
+
+  console.log("Is Authenticated Guard:", authService.authStatus())
+
+  if(authService.isAuthenticated())
     return true
 
   

@@ -40,10 +40,11 @@ export class AuthService {
 
   private setAuthentication(user: User, token: string): boolean {
 
+    console.log("Current User: ", user)
     localStorage.setItem('keyToken',token);
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
-    // console.log("Set Authentication: ", this.authStatus())
+    console.log("Set Authentication: ", this.authStatus())
     return true;
   }
 
@@ -81,28 +82,35 @@ export class AuthService {
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
-        map( ({user, token}) => this.setAuthentication(user,token) ),
+        map( ({user, token}) => this.setAuthentication(user,token)
+        ),
         catchError(err => throwError(() => err.error.message))
       );
 
   }
 
+  isAuthenticated(): boolean{
+    
+    const token = localStorage.getItem("keyToken")
+    return !!token 
+  }
+  
   private router = inject(Router)
 
-  public authServiceAuthStatusChangeEffect = effect(() => {
+  // public authServiceAuthStatusChangeEffect = effect(() => {
 
-    console.log("Change Effect: ",this.authStatus())
-    switch (this.authStatus()){
-      case AuthStatus.checking:
-        break;
-      case AuthStatus.authenticated:
-        // console.log("Auth Service Effect: Authenticated")
-        this.router.navigateByUrl('/todo/task')
-        break;
-      case AuthStatus.notAuthenticated:
-        // console.log("Auth Service Effect: Not Authenticated")
-        this.router.navigateByUrl('/auth/login')
-        break;
-    }
-  })
+  //   console.log("Change Effect Auth Service: ",this.authStatus())
+  //   switch (this.authStatus()){
+  //     case AuthStatus.checking:
+  //       break;
+  //     case AuthStatus.authenticated:
+  //       console.log("Auth Service Redirectioning to todo/task")
+  //       this.router.navigateByUrl('/todo/task')
+  //       break;
+  //     case AuthStatus.notAuthenticated:
+  //       // console.log("Auth Service Effect: Not Authenticated")
+  //       this.router.navigateByUrl('/auth/login')
+  //       break;
+  //   }
+  // })
 }
