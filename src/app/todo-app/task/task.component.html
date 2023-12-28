@@ -67,6 +67,16 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+
+            <!-- <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                    
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    
+                </mat-grid-tile>
+            </mat-grid-list> -->
             <button mat-raised-button
                 color="primary"
                 style="margin: 1rem;"
@@ -74,7 +84,15 @@
             >
                 Create a New Task
             </button>
+            <mat-paginator [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                aria-label="Select page"
+                (page)="changePage($event)">
+            </mat-paginator>            
+
         </mat-card-content>
+
     </mat-card>        
 
 </div>

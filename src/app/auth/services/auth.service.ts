@@ -44,10 +44,6 @@ export class AuthService {
   getConfigHeader(){
     return new HttpHeaders()
     .set("keyToken", this.keyToken() ?? "")
-
-    // return {
-    //   headers: { keyToken: this.keyToken() } 
-    // }
   }
 
   private setAuthentication(user: User, token: string): boolean {

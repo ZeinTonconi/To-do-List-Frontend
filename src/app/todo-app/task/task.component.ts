@@ -7,6 +7,7 @@ import { CreateTaskComponent } from '../modals/create-task/create-task.component
 import { MatTable } from '@angular/material/table';
 import { Tag } from '../interfaces/tag.insterface';
 import { UpdateTaskComponent } from '../modals/update-task/update-task.component';
+import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-task',
@@ -16,6 +17,7 @@ import { UpdateTaskComponent } from '../modals/update-task/update-task.component
 }) 
 export class TaskComponent {
   
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   displayedColumns: string[] = ['completed', 'task','tags','category','action'];
 
@@ -36,7 +38,7 @@ export class TaskComponent {
     
     this.taskService.getTasks().subscribe( ({tasks}) => {
       this.taskData=tasks
-      console.log(this.taskData)
+      this.paginator.length=tasks.length
     })
   }
 
@@ -56,10 +58,8 @@ export class TaskComponent {
 
     this.createTaskDialog.open(CreateTaskComponent)
       .afterClosed().subscribe((newTask) =>{
-        console.log(newTask);
         if(newTask){  
           this.taskService.createTask(newTask.name,newTask.category).subscribe((res)=>{
-            console.log(res);
             const {description, id_category, id, status} = res.newTask;
             const {category} = res;  
             const tags:Tag[] = []
@@ -113,5 +113,15 @@ export class TaskComponent {
         }
 
       })
+  }
+  changePage(event:PageEvent){
+    
+    const resDiv = event.pageIndex
+    const div = event.pageSize
+
+    this.taskService.getTasks().subscribe( ({tasks}) => {
+      this.taskData = tasks.filter((_, index) => Math.floor(index/div) == resDiv)
+    })
+
   }
 }

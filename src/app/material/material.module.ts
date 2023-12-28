@@ -11,11 +11,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
 
 @NgModule({
   exports: [
@@ -30,6 +30,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     MatListModule,
     MatMenuModule,
+    MatPaginatorModule,
     MatSidenavModule,
     MatSelectModule,
     MatTableModule,
