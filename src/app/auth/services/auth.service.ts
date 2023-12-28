@@ -84,7 +84,6 @@ export class AuthService {
     localStorage.removeItem('keyToken')
     this._currentUser.set(null)
     this._authStatus.set(AuthStatus.notAuthenticated)
-    // console.log("Logout", this.authStatus())
   }
 
   login(email: string, password: string): Observable<boolean> {
@@ -107,21 +106,4 @@ export class AuthService {
     return !!token 
   }
   
-
-  // public authServiceAuthStatusChangeEffect = effect(() => {
-
-  //   console.log("Change Effect Auth Service: ",this.authStatus())
-  //   switch (this.authStatus()){
-  //     case AuthStatus.checking:
-  //       break;
-  //     case AuthStatus.authenticated:
-  //       console.log("Auth Service Redirectioning to todo/task")
-  //       this.router.navigateByUrl('/todo/task')
-  //       break;
-  //     case AuthStatus.notAuthenticated:
-  //       // console.log("Auth Service Effect: Not Authenticated")
-  //       this.router.navigateByUrl('/auth/login')
-  //       break;
-  //   }
-  // })
 }
