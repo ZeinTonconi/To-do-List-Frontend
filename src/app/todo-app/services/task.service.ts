@@ -79,6 +79,10 @@ export class TaskService {
     })
   }
 
-  
+  getTasksPagination(pageIndex: Number, pageSize: Number){
+    return this.http.get<Tasks>(`${this.url}/api/tasks/pagination?page=${pageIndex}&size=${pageSize}`, {
+      headers: this.authService.getConfigHeader()
+    })
+  }
 }
 

@@ -115,13 +115,13 @@ export class TaskComponent {
       })
   }
   changePage(event:PageEvent){
+   
     
-    const resDiv = event.pageIndex
-    const div = event.pageSize
-
-    this.taskService.getTasks().subscribe( ({tasks}) => {
-      this.taskData = tasks.filter((_, index) => Math.floor(index/div) == resDiv)
+    this.taskService.getTasksPagination(event.pageIndex, event.pageSize)
+    .subscribe(({tasks}) => {
+      this.taskData = tasks
     })
+    
 
   }
 }
