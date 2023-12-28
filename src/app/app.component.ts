@@ -15,15 +15,7 @@ export class AppComponent {
   private router = inject( Router )
 
   constructor() {
-    effect(() => {
-      console.log("Change Effect: ",this.authService.authStatus())
-      if(this.authService.authStatus() == AuthStatus.authenticated){
-        this.router.navigateByUrl('/todo/task')
-      }
-      else{
-        this.router.navigateByUrl('/auth/login')
-      }
-    })
+
   }
 
   public finishedAuthChecking = computed<boolean>( () => {
@@ -34,25 +26,4 @@ export class AppComponent {
     return true
   })
 
-
-  // public authStatusChangeEffect = effect(() => {
-
-  //   console.log("Change Effect: ",this.authService.authStatus())
-  //   if(this.authService.isAuthenticated()){
-  //     this.router.navigateByUrl('/todo/task')
-  //   }
-  //   else{
-  //     this.router.navigateByUrl('/auth/login')
-  //   }
-  //   // switch (this.authService.isAuthenticated()){
-  //   //   case AuthStatus.checking:
-  //   //     break;
-  //   //   case AuthStatus.authenticated:
-  //   //     this.router.navigateByUrl('/todo/task')
-  //   //     break;
-  //   //   case AuthStatus.notAuthenticated:
-  //   //     this.router.navigateByUrl('/auth/login')
-  //   //     break;
-  //   // }
-  // })
 }

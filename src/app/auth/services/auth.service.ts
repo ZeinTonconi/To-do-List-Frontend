@@ -25,8 +25,20 @@ export class AuthService {
   public keyToken = computed(() => localStorage.getItem('keyToken'));
 
   
+  private router = inject(Router)
+
   constructor() { 
     this.checkStatus().subscribe()
+    effect(() => {
+      console.log("Called from", this.constructor.name)
+      console.log("Change Effect: ",this.authStatus(), "From AuthService")
+      if(this.authStatus() == AuthStatus.authenticated){
+        this.router.navigateByUrl('/todo/task')
+      }
+      else{
+        this.router.navigateByUrl('/auth/login')
+      }
+    })
   }
 
   getConfigHeader(){
@@ -95,7 +107,6 @@ export class AuthService {
     return !!token 
   }
   
-  private router = inject(Router)
 
   // public authServiceAuthStatusChangeEffect = effect(() => {
 

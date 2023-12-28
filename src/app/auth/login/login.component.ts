@@ -60,8 +60,6 @@ export class LoginComponent {
       this.authService.login(email, password)
       .subscribe( {
           next: success => {
-            // console.log("Login Component redirect to todo/task")
-            // this.router.navigateByUrl('todo/task')
           },
           error: errorMsg => {
             this.loginForm.setErrors({

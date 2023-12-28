@@ -33,6 +33,5 @@ export class HomeComponent {
 
   logout(){
     this.authService.logout()
-    // this.router.navigateByUrl('/auth/login')
   }
 }
