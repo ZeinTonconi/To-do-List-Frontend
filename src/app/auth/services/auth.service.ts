@@ -7,6 +7,7 @@ import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { LoginResponse } from '../interfaces/login-response.interface';
 import { CheckTokenResponse } from '../interfaces/check-token-response.interface';
 import { Router } from '@angular/router';
+import { RegisterResponse } from '../interfaces/register-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class AuthService {
     effect(() => {
       console.log("Called from", this.constructor.name)
       console.log("Change Effect: ",this.authStatus(), "From AuthService")
-      if(this.authStatus() == AuthStatus.authenticated){
+      if(this.authStatus() === AuthStatus.authenticated){
         this.router.navigateByUrl('/todo/task')
       }
       else{
@@ -94,6 +95,17 @@ export class AuthService {
         catchError(err => throwError(() => err.error.message))
       );
 
+  }
+
+  register(email: string, password: string): Observable<boolean> {
+    const url = `${this.baseURL}api/auth/create`
+    const body = {email,password} 
+
+    return this.http.post<RegisterResponse>(url,body)
+      .pipe(
+        map( ({user,token}) =>  this.setAuthentication(user,token) ),
+        catchError(err => throwError(() => err.error.message))
+      )
   }
 
   isAuthenticated(): boolean{

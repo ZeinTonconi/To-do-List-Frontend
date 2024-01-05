@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "todo-list": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "es-PR": "src/locale/messages.es.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +19,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["es-PR"],
             "outputPath": "dist/todo-list",
             "index": "src/index.html",
             "main": "src/main.ts",

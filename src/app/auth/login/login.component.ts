@@ -74,6 +74,10 @@ export class LoginComponent {
     return this.loginForm.errors
   }
 
+  goToRegister(){
+    console.log('go to register')
+    this.router.navigateByUrl('/auth/register')
+  }
 }
 
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1161299114153631702" datatype="html">
+        <source>Completed</source>
+        <target>Completado</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4578192247039196794" datatype="html">
+        <source>Task</source>
+        <target>Tarea</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7886570921510760899" datatype="html">
+        <source>Tags</source>
+        <target>Etiqueta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1806667489382256324" datatype="html">
+        <source>Category</source>
+        <target>Categoria</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3193976279273491157" datatype="html">
+        <source>Actions</source>
+        <target>Acciones</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3259316322621660863" datatype="html">
+        <source> Create a New Task </source>
+        <target>Creatr una nueva tarea</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">85,87</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

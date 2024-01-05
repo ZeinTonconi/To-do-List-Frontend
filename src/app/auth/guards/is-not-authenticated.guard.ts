@@ -10,7 +10,7 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   
   // console.log("Is not authenticated guard: ",authService.authStatus(), authService.currentUser())
 
-  if( authService.authStatus() === AuthStatus.authenticated){
+  if(authService.isAuthenticated() ){
     router.navigateByUrl('/todo/task')
     return false
   }

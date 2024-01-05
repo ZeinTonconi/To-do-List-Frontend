@@ -8,13 +8,24 @@
 
         <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="1" >
-            <mat-card class="login-card">
+            <mat-card class="register-card">
                 <mat-card-header>
-                    <mat-card-title class="fs-1">Login</mat-card-title>
+                    <mat-card-title class="fs-1">Register</mat-card-title>
                 </mat-card-header>
                 <mat-card-content style="height: 100%; width: 100%;">
                     <mat-grid-list cols="1" rowHeight="33%">
-                        <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <form [formGroup]="registerForm" (ngSubmit)="register()">
+                            <mat-grid-tile >
+                                <div>
+                                    <h2>Name</h2>
+                                    <mat-form-field style="width: 100%;">
+                                        <mat-label>Name</mat-label>
+                                        <input type="text" matInput
+                                            formControlName="name"
+                                        >
+                                    </mat-form-field>
+                                </div>
+                            </mat-grid-tile>
                             <mat-grid-tile >
                                 <div>
                                     <h2>E-mail</h2>
@@ -41,15 +52,15 @@
                             <mat-grid-tile >
                                 <div style="display: flex; flex-direction: column;">
 
-                                   <p *ngIf="showMsgError()">* User or password are incorrect</p>   
+                                   <p *ngIf="showMsgError()">* Email or password are empty</p>   
                                     <button mat-raised-button color="primary"
                                         type="submit"
                                     >
-                                        Login
+                                        Register
                                     </button>
                                     <br>
                                     <p></p>
-                                    <h3 (click)="goToRegister()">Don't you have an account? Register here</h3>
+                                    <h3 (click)="goToLogin()">Do you have an account? Login here</h3>
                                 </div>
                                 
                             </mat-grid-tile>

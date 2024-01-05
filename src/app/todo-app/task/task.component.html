@@ -5,19 +5,19 @@
             <table mat-table [dataSource]="taskData" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="completed">
-                    <th mat-header-cell *matHeaderCellDef>Completed</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Completed</th>
                     <td mat-cell *matCellDef="let element ">
                         <mat-checkbox [(ngModel)]="element.status" (click)="changeCompleted(element)"></mat-checkbox>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="task">
-                    <th mat-header-cell *matHeaderCellDef>Task</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Task</th>
                     <td mat-cell *matCellDef="let element">{{element.description}}</td>
                 </ng-container>
                 
                 <ng-container matColumnDef="tags">
-                    <th mat-header-cell *matHeaderCellDef>Tags</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Tags</th>
 
                     
                     <td mat-cell *matCellDef="let element, let task">
@@ -39,7 +39,7 @@
                 </ng-container>
                 
                 <ng-container matColumnDef="category">
-                    <th mat-header-cell *matHeaderCellDef>Category</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Category</th>
                     <td mat-cell *matCellDef="let element">
                         <mat-chip>
                             {{element.category.categoryName}}
@@ -48,7 +48,7 @@
                 </ng-container>
                 
                 <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef>Actions</th>                  
+                    <th mat-header-cell *matHeaderCellDef i18n>Actions</th>                  
                     <td mat-cell *matCellDef="let element; let i=index">
                         <button mat-button
                             (click)="delete(i)"
@@ -81,6 +81,7 @@
                 color="primary"
                 style="margin: 1rem;"
                 (click)="createTask()"
+                i18n
             >
                 Create a New Task
             </button>
