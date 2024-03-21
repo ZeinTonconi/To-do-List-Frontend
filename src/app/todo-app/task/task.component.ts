@@ -2,7 +2,7 @@ import { Component, Inject, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTagModalComponent } from '../modals/add-tag-modal/add-tag-modal.component';
 import { TaskService } from '../services/task.service';
-import { Task } from '../interfaces/task.interface';
+import { NewTask, Task } from '../interfaces/task.interface';
 import { CreateTaskComponent } from '../modals/create-task/create-task.component';
 import { MatTable } from '@angular/material/table';
 import { Tag } from '../interfaces/tag.insterface';
@@ -15,6 +15,10 @@ import { Category } from '../interfaces/category.interface';
 import { FilterBuilder } from './filters/filter.builder';
 import { DateFilter } from '../interfaces/dateFilter.interface';
 import { CompletedOrNot } from '../enum/completed.enum';
+import { CreateTaskCommand } from './commands/createTask.command';
+import { DeleteTaskCommand } from './commands/deleteTask.command';
+import { Command } from './commands/command..abstract';
+import { UpdateTaskCommand } from './commands/updateTask.command';
 
 @Component({
   selector: 'app-task',
@@ -59,10 +63,7 @@ export class TaskComponent {
   categories: Category[] = []
 
   constructor (
-    //private addDialogTag:MatDialog, 
                private taskService:TaskService,
-    //private createTaskDialog:MatDialog,
-               //private updateTaskDialog:MatDialog,
                private fb: FormBuilder,
                private tagService: TagService,
                private categorySerivce: CategoryService
@@ -73,11 +74,11 @@ export class TaskComponent {
       this.paginator.length=tasks.length
     })
 
-    tagService.getTags().subscribe( ({tags}) => {
+    this.tagService.getTags().subscribe( ({tags}) => {
       this.tags = tags
     })
 
-    categorySerivce.getCategories().subscribe( ({categories}) => {
+    this.categorySerivce.getCategories().subscribe( ({categories}) => {
       this.categories = categories
     })
 
@@ -96,41 +97,31 @@ export class TaskComponent {
     });
   }
 
+  executeCommand(command: Command){
+    command.execute().subscribe( () => {
+      this.table.renderRows();
+    })
+  }
+
+
   createTask(){
 
     this.createTaskDialog.open(CreateTaskComponent)
       .afterClosed().subscribe((newTask) =>{
         if(newTask){  
-          this.taskService.createTask(newTask.name,newTask.category).subscribe((res)=>{
-            const {description, id_category, id, status} = res.newTask;
-            const {category} = res;  
-            const tags:Tag[] = []
-            newTask.tags.forEach((tag:Tag) => {
-              this.taskService.addTag(id,tag.id);
-              tags.push(tag)  
-            });
 
-            const task = {
-              id, 
-              description, 
-              status, 
-              id_category,
-              category,
-              tags
-            }
-            this.taskData.push(task);
-            this.table.renderRows();
-          });
+          const createTaskCommand = new CreateTaskCommand(newTask, this.taskData, this.taskService)
+          this.executeCommand(createTaskCommand)
+
         }
       });
   }
 
   delete(index:number){
-    const task=this.taskData[index];
-    this.taskService.deleteTask(task.id).subscribe((res)=> {
-      this.taskData.splice(index,1);
-      this.table.renderRows();
-    })
+
+    const deleteTaskCommand = new DeleteTaskCommand(index, this.taskData, this.taskService)
+    this.executeCommand(deleteTaskCommand)
+
   }
 
   changeCompleted(task:Task){
@@ -141,24 +132,14 @@ export class TaskComponent {
     this.updateTaskDialog.open(UpdateTaskComponent,{data: this.taskData[index]})
       .afterClosed().subscribe((res) => {
         if(res){
-          const newDescription = res.name;
-          const newCategory = res.category;
-          const task = this.taskData[index];
-          this.taskService.updateTask(task.id,newDescription,newCategory).subscribe((task) => {
-
-            this.taskData[index].description = newDescription;
-            this.taskData[index].category = task.category;
-            this.table.renderRows();
-          })
-
-          
+          const updateTaskCommand = new UpdateTaskCommand(res, this.taskData, index, this.taskService)
+          this.executeCommand(updateTaskCommand)
         }
 
       })
   }
   changePage(event:PageEvent){
    
-    
     this.taskService.getTasksPagination(event.pageIndex, event.pageSize)
     .subscribe(({tasks}) => {
       this.taskData = tasks
@@ -189,7 +170,6 @@ export class TaskComponent {
 
     this.taskService.getTasks().subscribe(({tasks}) => {
       this.taskData = filter.build().applyFilter(tasks);
-      console.log(this.taskData);
       this.table.renderRows();
     })
   }
