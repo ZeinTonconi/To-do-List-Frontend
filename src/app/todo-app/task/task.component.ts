@@ -33,12 +33,12 @@ export class TaskComponent {
   private updateTaskDialog = inject(MatDialog)
 
   
-  foodControl: FormControl = new FormControl()
-  foodForm: FormGroup = this.fb.group({
-    food: this.foodControl
+  pokeControl: FormControl = new FormControl()
+  pokeForm: FormGroup = this.fb.group({
+    poke: this.pokeControl
   })
 
-  foods: String[] = ["charmander", "bulbasaur"]
+  pokes: String[] = ["charmander", "bulbasaur"]
 
 
   constructor (
