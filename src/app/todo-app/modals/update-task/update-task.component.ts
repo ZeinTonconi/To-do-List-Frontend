@@ -54,7 +54,7 @@ export class UpdateTaskComponent {
     return {
       name: this.taskForm.controls['name'].value,
       category: this.taskForm.controls['category'].value,
-      // tags: this.actualTags
+      tags: this.actualTags
 
     }
   }

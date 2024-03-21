@@ -8,6 +8,7 @@ import { MatTable } from '@angular/material/table';
 import { Tag } from '../interfaces/tag.insterface';
 import { UpdateTaskComponent } from '../modals/update-task/update-task.component';
 import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task',
@@ -16,6 +17,8 @@ import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/pag
   ]
 }) 
 export class TaskComponent {
+
+
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -29,11 +32,21 @@ export class TaskComponent {
   private createTaskDialog = inject(MatDialog)
   private updateTaskDialog = inject(MatDialog)
 
+  
+  foodControl: FormControl = new FormControl()
+  foodForm: FormGroup = this.fb.group({
+    food: this.foodControl
+  })
+
+  foods: String[] = ["charmander", "bulbasaur"]
+
+
   constructor (
     //private addDialogTag:MatDialog, 
                private taskService:TaskService,
     //private createTaskDialog:MatDialog,
-               //private updateTaskDialog:MatDialog
+               //private updateTaskDialog:MatDialog,
+               private fb: FormBuilder
                ){
     
     this.taskService.getTasks().subscribe( ({tasks}) => {

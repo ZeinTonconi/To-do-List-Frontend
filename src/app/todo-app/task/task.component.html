@@ -1,5 +1,21 @@
 <div class="container mt-5">
 
+    <form [formGroup]="foodForm">
+        <h4>mat-select</h4>
+        <mat-form-field>
+          <mat-label>Favorite Food</mat-label>
+          <mat-select [formControl]="foodControl" name="food">
+            <mat-option>None</mat-option>
+            @for (food of foods; track food) {
+              <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <p>Selected: {{foodControl.value}}</p>
+        
+    </form>
+      
+
     <mat-card>
         <mat-card-content>
             <table mat-table [dataSource]="taskData" class="mat-elevation-z8">
@@ -96,4 +112,4 @@
 
     </mat-card>        
 
-</div>
+</div> 
