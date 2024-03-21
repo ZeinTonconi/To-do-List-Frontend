@@ -9,6 +9,12 @@ import { Tag } from '../interfaces/tag.insterface';
 import { UpdateTaskComponent } from '../modals/update-task/update-task.component';
 import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TagService } from '../services/tag.service';
+import { CategoryService } from '../services/category.service';
+import { Category } from '../interfaces/category.interface';
+import { FilterBuilder } from './filters/filter.builder';
+import { DateFilter } from '../interfaces/dateFilter.interface';
+import { CompletedOrNot } from '../enum/completed.enum';
 
 @Component({
   selector: 'app-task',
@@ -33,26 +39,49 @@ export class TaskComponent {
   private updateTaskDialog = inject(MatDialog)
 
   
-  pokeControl: FormControl = new FormControl()
-  pokeForm: FormGroup = this.fb.group({
-    poke: this.pokeControl
+  tagControl: FormControl = new FormControl();
+  categoryControl: FormControl = new FormControl();
+  completed: FormControl = new FormControl<number>(0)
+  
+  dateRange = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  }); 
+  
+  filterForm: FormGroup = this.fb.group({
+    tagFilter: this.tagControl,
+    categorryFilter: this.categoryControl,
+    dateRangeFilter: this.dateRange,
+    completedFilter: this.completed
   })
 
-  pokes: String[] = ["charmander", "bulbasaur"]
-
+  tags: Tag[] = []
+  categories: Category[] = []
 
   constructor (
     //private addDialogTag:MatDialog, 
                private taskService:TaskService,
     //private createTaskDialog:MatDialog,
                //private updateTaskDialog:MatDialog,
-               private fb: FormBuilder
+               private fb: FormBuilder,
+               private tagService: TagService,
+               private categorySerivce: CategoryService
                ){
     
     this.taskService.getTasks().subscribe( ({tasks}) => {
       this.taskData=tasks
       this.paginator.length=tasks.length
     })
+
+    tagService.getTags().subscribe( ({tags}) => {
+      this.tags = tags
+    })
+
+    categorySerivce.getCategories().subscribe( ({categories}) => {
+      this.categories = categories
+    })
+
+    
   }
 
 
@@ -136,5 +165,37 @@ export class TaskComponent {
     })
     
 
+  }
+
+
+  filterTasks(){
+    const filter = new FilterBuilder()
+
+    if(this.tagControl)
+      filter.setTag(this.tagControl.value)
+
+    if(this.categoryControl)
+      filter.setCategory(this.categoryControl.value)
+
+    if(this.completed.value === 0)
+      filter.setCompleted(CompletedOrNot.Any)
+
+    if(this.completed.value === 1)
+      filter.setCompleted(CompletedOrNot.Completed)
+
+    if(this.completed.value === 2)
+      filter.setCompleted(CompletedOrNot.NoCompleted)
+
+
+    this.taskService.getTasks().subscribe(({tasks}) => {
+      this.taskData = filter.build().applyFilter(tasks);
+      console.log(this.taskData);
+      this.table.renderRows();
+    })
+  }
+
+  clearFilter(){
+    this.filterForm.reset()
+    this.filterTasks()
   }
 }
