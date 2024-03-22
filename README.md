@@ -1,28 +1,20 @@
-# TodoList
+### Frontend README
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+Welcome to To-do List To-zo frontend repository! This project aims to provide users with a convenient platform for managing their tasks efficiently. Users can log in, create, modify, and delete tasks, as well as organize them using customizable tags and categories. The frontend is built with Angular v17 and supports internationalization (i18n) for English and Spanish languages.
 
-## Development server
+#### Technologies Used:
+- Angular v17
+- Internationalization (i18n) for English and Spanish language support
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### Getting Started:
+1. Open your terminal.
+2. Navigate to the project directory.
+3. Run `npm i` to install all dependencies.
+4. Ensure that the backend is running.
+5. Run `ng serve -o` to initialize the application. This command will automatically open the application in your default web browser.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# To-do-List-Frontend
+#### Usage:
+- To register, go to `/auth/register` route.
+- The application utilizes guards for routing:
+  - If a user attempts to access the login page while already logged in, they will be redirected to the main application.
+  - If a user is not logged in and attempts to access any route within the application, they will be redirected to the login page.
