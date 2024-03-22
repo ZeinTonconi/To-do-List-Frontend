@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TodoAppRoutingModule } from './todo-app-routing.module';
@@ -14,7 +14,7 @@ import { TaskComponent } from './task/task.component';
 import { CategoryService } from './services/category.service';
 import { TaskService } from './services/task.service';
 import { TagService } from './services/tag.service';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../auth/services/auth.service';
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { AuthService } from './services/auth.service';
     MaterialModule,
     FormsModule,
     ModalsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,

@@ -1,23 +1,78 @@
 <div class="container mt-5">
 
+    
+    <form [formGroup]="filterForm">
+        <div class="row">
+            <div class="col-xs-6" style="width: auto;">
+                <h4 i18n>Filter by Category</h4>
+                <mat-form-field>
+                <mat-label i18n>Category</mat-label>
+                <mat-select [formControl]="categoryControl" name="category">
+                    <mat-option i18n>None</mat-option>
+                    @for (category of categories; track category) {
+                    <mat-option [value]="category">{{category.categoryName}}</mat-option>
+                    }
+                </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-xs-6" style="width: auto;">
+                <h4 i18n>Filter by Tags</h4>
+                <mat-form-field>
+                <mat-label i18n>Tag</mat-label>
+                <mat-select [formControl]="tagControl" name="tag">
+                    <mat-option i18n>None</mat-option>
+                    @for (tag of tags; track tag) {
+                    <mat-option [value]="tag">{{tag.tagName}}</mat-option>
+                    }
+                </mat-select>
+                </mat-form-field>
+            </div>
+
+          
+            <div class="col-xs-6" style="width: auto; margin-top: 50px;">
+                <mat-chip-listbox [formControl]="completed">
+                    <mat-chip-option [value]="1" i18n>Completed</mat-chip-option>
+                    <mat-chip-option [value]="2" i18n>No Completed</mat-chip-option>
+                </mat-chip-listbox>
+
+            </div>
+            
+        </div>
+        
+        <button mat-button color="primary" 
+                style="font-size: 1.5rem; margin: 30px;"
+                (click)="filterTasks()" i18n>
+            Filter
+        </button>
+        <button mat-button color="primary" 
+                style="font-size: 1.5rem; margin: 30px;"
+                (click)="clearFilter()" i18n>
+            Clear
+        </button>
+    </form>
+    
+
+      
+
     <mat-card>
         <mat-card-content>
             <table mat-table [dataSource]="taskData" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="completed">
-                    <th mat-header-cell *matHeaderCellDef>Completed</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Completed</th>
                     <td mat-cell *matCellDef="let element ">
                         <mat-checkbox [(ngModel)]="element.status" (click)="changeCompleted(element)"></mat-checkbox>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="task">
-                    <th mat-header-cell *matHeaderCellDef>Task</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Task</th>
                     <td mat-cell *matCellDef="let element">{{element.description}}</td>
                 </ng-container>
                 
                 <ng-container matColumnDef="tags">
-                    <th mat-header-cell *matHeaderCellDef>Tags</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Tags</th>
 
                     
                     <td mat-cell *matCellDef="let element, let task">
@@ -39,7 +94,7 @@
                 </ng-container>
                 
                 <ng-container matColumnDef="category">
-                    <th mat-header-cell *matHeaderCellDef>Category</th>
+                    <th mat-header-cell *matHeaderCellDef i18n>Category</th>
                     <td mat-cell *matCellDef="let element">
                         <mat-chip>
                             {{element.category.categoryName}}
@@ -48,7 +103,7 @@
                 </ng-container>
                 
                 <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef>Actions</th>                  
+                    <th mat-header-cell *matHeaderCellDef i18n>Actions</th>                  
                     <td mat-cell *matCellDef="let element; let i=index">
                         <button mat-button
                             (click)="delete(i)"
@@ -67,14 +122,24 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+
             <button mat-raised-button
                 color="primary"
                 style="margin: 1rem;"
                 (click)="createTask()"
+                i18n
             >
                 Create a New Task
             </button>
+            <mat-paginator [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                aria-label="Select page"
+                (page)="changePage($event)">
+            </mat-paginator>            
+
         </mat-card-content>
+
     </mat-card>        
 
-</div>
+</div> 

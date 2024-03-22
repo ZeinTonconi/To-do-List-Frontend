@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../interfaces/category.interface';
 import { Tag } from '../../interfaces/tag.insterface';
@@ -14,11 +14,12 @@ import { MatDialogRef } from '@angular/material/dialog';
   ]
 })
 export class CreateTaskComponent {
+
   categories:Category[]=[]
   
-  taskForm = this.fb.group({
-    name: [''],
-    category: [''],
+  taskForm: FormGroup = this.fb.group({
+    name: ['', Validators.required],
+    category: ['', Validators.required],
     // tags: this.fb.array([
     //   this.fb.control('')
     // ])
@@ -50,12 +51,19 @@ export class CreateTaskComponent {
   }
 
   createTask(){
-    return {
+    if(this.taskForm.invalid){
+      this.taskForm.markAllAsTouched();
+      return;
+    }
+    this.dialogRef.close({
       name: this.taskForm.controls['name'].value,
       category: this.taskForm.controls['category'].value,
       tags: this.actualTags
-
-    }
+    })
   }
 
+  isValidField(field:string){
+    return this.taskForm.controls[field].errors
+      && this.taskForm.controls[field].touched;
+  }
 }
