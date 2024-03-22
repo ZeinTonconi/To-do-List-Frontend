@@ -3,6 +3,5 @@ import { Task } from "../../interfaces/task.interface";
 
 export abstract class Command {
 
-    // public abstract execute(): Observable<Task[]>;
     public abstract execute(): Observable<void>;
 }

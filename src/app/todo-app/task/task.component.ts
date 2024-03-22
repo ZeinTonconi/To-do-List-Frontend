@@ -28,7 +28,6 @@ import { UpdateTaskCommand } from './commands/updateTask.command';
 }) 
 export class TaskComponent {
 
-
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

@@ -2,46 +2,107 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="1161299114153631702" datatype="html">
-        <source>Completed</source>
+      <trans-unit id="4095719924885338783" datatype="html">
+        <source>Filter by Category</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4578192247039196794" datatype="html">
-        <source>Task</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7886570921510760899" datatype="html">
-        <source>Tags</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1806667489382256324" datatype="html">
         <source>Category</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6252070156626006029" datatype="html">
+        <source>None</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8903964414466221129" datatype="html">
+        <source>Filter by Tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1825829511397926879" datatype="html">
+        <source>Tag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1161299114153631702" datatype="html">
+        <source>Completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3268913787679272853" datatype="html">
+        <source>No Completed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3204898464866793351" datatype="html">
+        <source> Filter </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">45,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1238583382012712938" datatype="html">
+        <source> Clear </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">50,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4578192247039196794" datatype="html">
+        <source>Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7886570921510760899" datatype="html">
+        <source>Tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3193976279273491157" datatype="html">
         <source>Actions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">106</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3259316322621660863" datatype="html">
         <source> Create a New Task </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/todo-app/task/task.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">131,133</context>
         </context-group>
       </trans-unit>
     </body>
