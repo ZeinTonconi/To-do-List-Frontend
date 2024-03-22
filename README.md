@@ -1,4 +1,4 @@
-### Frontend README
+### To-zo Frontend
 
 Welcome to To-do List To-zo frontend repository! This project aims to provide users with a convenient platform for managing their tasks efficiently. Users can log in, create, modify, and delete tasks, as well as organize them using customizable tags and categories. The frontend is built with Angular v17 and supports internationalization (i18n) for English and Spanish languages.
 
